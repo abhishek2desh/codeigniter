@@ -370,7 +370,7 @@ tbody{
               -webkit-box-shadow: 1px 1px 3px #000;
               box-shadow: 2px 2px 3px #000;
              opacity: 0.4;
-             width: 120px;
+             width: 100px;
              margin-bottom: 10px; 
 }
 
@@ -378,6 +378,9 @@ tbody{
   position: fixed;
   top:5%;
 
+}
+#properties thead{
+  cursor: pointer;
 }
      </style>
        
@@ -399,6 +402,37 @@ tbody{
 
     <body   id="body" style="overflow:hidden; margin:0">
     <script>
+
+$(document).ready(function(){
+  
+
+if( localStorage['draft']!=null)
+  {var  contentEl = document.getElementById("openModal");
+    contentEl.innerHTML=localStorage['draft'];
+      if(localStorage['ratingTypeInt']!=null){
+      setRatings(localStorage['ratingTypeInt']);
+      console.log("ratingTypeInt:"+localStorage['ratingTypeInt']);
+      }
+      if (localStorage['ratingSize']!=null){ 
+      setRatingSize(localStorage['ratingSize']);
+      }
+ }
+ 
+ if( localStorage['draft']==null)
+            {
+                setRatings('1');
+                setRatingSize('md');
+            }
+            jscolor=$('#boxb').css('background-color');//setcolor of rating container
+ $('#rating.container-fluid').css('background-color',jscolor);
+
+  $('#boxb').attr("contentEditable","true");
+$('#page2').attr("contentEditable","true");
+$('#page3').attr("contentEditable","true");
+$('#page4').attr("contentEditable","true");
+  }
+  );
+
 
             $(document).ready(function(){
               $(window).load(function(){
@@ -1152,7 +1186,7 @@ function changeFonts(value)
         <li><a href="#dropdown4" onClick="setOption('false')" data-toggle="tab"><span class="  glyphicon glyphicon-wrench"></span>&nbsp;Link Generator</a></li>
         <li id="btnDesign1" data-toggle="collapse" data-target=""  ><a href="#design" onClick="setOption('true')"    data-toggle="tab"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Design</a></li>
         <li ><a href="#" onClick="saveDraftLocal()" data-toggle=""><span class=" glyphicon glyphicon-eye-open"></span>&nbsp;Preview</a></li>
-        <li ><a href="#dropdown5" onClick="saveDesignDb()" data-toggle="tab"><span class="  glyphicon glyphicon-floppy-disk"></span>&nbsp;Save & Publish </a></li>
+        <li ><a href="#dropdown5" onClick="saveDesignDb();setOption('false');" data-toggle="tab"><span class="  glyphicon glyphicon-floppy-disk"></span>&nbsp;Save & Publish </a></li>
         <li ><a href="#" onClick="resetDesign()" data-toggle=""><span class="glyphicon glyphicon-refresh"></span>&nbsp;Reset Design</a></li>
         <li role="presentation" class="dropdown pull-right">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -1220,7 +1254,7 @@ function changeFonts(value)
     <div class="form-group">
       <div class="col-md-8 col-md-offset-5">
         <button type="reset" class="btn btn-danger button">Cancel</button>
-        <button type="button"  class="btn btn-primary button" onClick='sendForm(1)'><a href="#dropdown2" onClick="setOption('false')" data-toggle="tab" style="color:#fff">Next</a></button>
+        <a href="#dropdown2" onClick="setOption('false')" data-toggle="tab" aria-expanded="true" style="color:#fff"><button type="button"  class="btn btn-primary button" onClick='sendForm(1)'>Next</button></a>
         <input type="hidden" name="formNo" value="1">
       </div>
     </div>
@@ -1284,7 +1318,7 @@ function changeFonts(value)
     <div class="form-group">
       <div class="col-md-8 col-md-offset-4">
         <button type="reset" class="btn btn-danger button">Cancel</button>
-        <button type="button" class="btn btn-primary button" onClick='sendForm(2)'><a href="#dropdown3" onClick="setOption('false')" data-toggle="tab" style="color:#fff">Next</a></button>
+        <a href="#dropdown3" onClick="setOption('false')" data-toggle="tab" aria-expanded="true" style="color:#fff"><button type="button" class="btn btn-primary button" onClick='sendForm(2)'>Next</button></a>
         <input type="hidden" name="formNo" value="2">
       </div>
     </div>
@@ -1373,7 +1407,7 @@ function changeFonts(value)
     <div class="form-group">
       <div class="col-md-8 col-md-offset-5">
         <button type="reset" class="btn btn-danger button">Cancel</button>
-        <button type="button" class="btn btn-primary button" onClick='sendForm(3)'><a href="#dropdown4" onClick="setOption('false')" data-toggle="tab" style="color:#fff">Next</a></button>
+        <a href="#dropdown4" onClick="setOption('false')" data-toggle="tab" aria-expanded="true" style="color:#fff"><button type="button" class="btn btn-primary button" onClick='sendForm(3)'>Next</button></a>
         <input type="hidden" name="formNo" value="3">
       </div>
     </div>
@@ -1418,7 +1452,7 @@ function changeFonts(value)
     <div class="form-group">
       <div class="col-md-8 col-md-offset-5">
         <button type="reset" class="btn btn-danger button">Cancel</button>
-        <button type="button" class="btn btn-primary button" onClick='sendForm(4)' style="width:15%"><a href="#design" onClick="setOption('true')"    data-toggle="tab" style="color:#fff">Start Designing</a></button>
+        <a href="#design" onClick="setOption('true')" data-toggle="tab" aria-expanded="true" style="color:#fff"><button type="button" class="btn btn-primary button" onClick='sendForm(4)' style="width:15%">Start Designing</button></a>
         <input type="hidden" name="formNo" value="4">
         
       </div>
@@ -1450,17 +1484,17 @@ function changeFonts(value)
   <div class="tab-pane fade" id="design" >
     
      <div class="container" style="float:right;right:20%">
-       <nav> <ul class="pagination" >
+       <nav> <ul class="pagination" style="float:right;right:29%">
               <li class="disabled"><a href="#">&laquo;</a></li>
-              <li onClick="getPage(1)" class="active"><a href="#">Nps Main Page</a></li>
+              <li onClick="getPage(1)" ><a href="#">Nps Main Page</a></li>
               <li onClick="getPage(2)" ><a href="#">Detractors Feedback</a></li>
               <li onClick="getPage(3)" ><a href="#">Passive Promoter Feedback</a></li>
               <li onClick="getPage(4)" ><a href="#">Thank You & Share</a></li>
               <li class="disabled"><a href="#">&raquo;</a></li>
             </ul>
         </nav>
-     </div>
-      <div id="openModal" class="modalDialog" >
+
+         <div id="openModal" class="modalDialog" >
             <div contentEditable='true' id="boxb" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)"> 
                 <a href="#" title="Close" class="close">X</a>
                <CENTER> <img class="nps_logo_img tip" tip="company logo" src="" alt="Here comes your logo"></CENTER>
@@ -1514,6 +1548,8 @@ function changeFonts(value)
               </div>
               
            </div>
+     </div>
+     
           
   </div>
 
@@ -2009,12 +2045,18 @@ decode.onclick = function() {
     */
 
 
-    $(".close").click(function() {
-  alert("closed clicked"); 
- });
+    
 
 
-$(document).ready(function(){$("[name='my-checkbox']").bootstrapSwitch();});
+$(document).ready(function(){
+
+      $(".close").click(function() {
+            alert("closed clicked"); 
+          });
+
+    $("[name='my-checkbox']").bootstrapSwitch();
+  }
+);
  
 
    
@@ -2116,41 +2158,6 @@ $.ajaxSetup({
   
 }
 
-$(document).ready(function(){
-  
-
-
-        
-        
-       
- 
-
-if( localStorage['draft']!=null)
-  {var  contentEl = document.getElementById("openModal");
-    contentEl.innerHTML=localStorage['draft'];
-      if(localStorage['ratingTypeInt']!=null){
-      setRatings(localStorage['ratingTypeInt']);
-      console.log("ratingTypeInt:"+localStorage['ratingTypeInt']);
-      }
-      if (localStorage['ratingSize']!=null){ 
-      setRatingSize(localStorage['ratingSize']);
-      }
- }
- 
- if( localStorage['draft']==null)
-            {
-                setRatings('1');
-                setRatingSize('md');
-            }
-            jscolor=$('#boxb').css('background-color');//setcolor of rating container
- $('#rating.container-fluid').css('background-color',jscolor);
-
-  $('#boxb').attr("contentEditable","true");
-$('#page2').attr("contentEditable","true");
-$('#page3').attr("contentEditable","true");
-$('#page4').attr("contentEditable","true");
-  }
-  );
 
 function resetDesign(){
 var r = confirm("You are about to destroy your design!! do you whish to proceed?");
@@ -2171,6 +2178,7 @@ if (r == true) {
 
 function sendForm(value)
 {
+  console.log(value);
 $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -2208,7 +2216,7 @@ switch(value){
         console.log(data);
     }
     });
-
+          break;
    case 3:
    //alert(value);
    $.ajax ({
@@ -2223,7 +2231,7 @@ switch(value){
       console.log(data);
       }
     });
-
+        break;
    case 4:
    //alert(value);
    $.ajax ({
@@ -2237,13 +2245,14 @@ switch(value){
        
       console.log(data);
      localStorage['fblink']=data;
-      $('#customText').append('<a id="fblink" target="_blank" href='+data+'  style="color:#ffffff;">Click Me facebook !</a>');
-      $('#customText').append('<a id="tweetlink" target="_blank" href="https://twitter.com/intent/tweet?text='+document.getElementById('sharetext').value+'&url='+document.getElementById('shareurl').value+'style="color:#ffffff;">Click Me twitter !</a>');
+      $('#customText').append('<center><a id="fblink" target="_blank" href='+data+'  style="color:#ffffff;">Click Me facebook !</a></center><br/>');
+      $('#customText').append('<center><a id="tweetlink" target="_blank" href="https://twitter.com/intent/tweet?text='+document.getElementById('sharetext').value+'&url='+document.getElementById('shareurl').value+'style="color:#ffffff;">Click Me twitter !</a></center>');
       $('#fblink').show();
       $('#tvc_fb').attr('href',data);
       $('#tvc_twitter').attr('href','https://twitter.com/intent/tweet?text='+document.getElementById('sharetext').value+'&url='+document.getElementById('shareurl').value);
       }
     });
+   break;
   }
 }
 

@@ -1,5 +1,5 @@
-$(document).ready(function(){
-  $("head").append("<link href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css rel=stylesheet></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js type=text/javascript></script><link rel=stylesheet href=http://tatvicnpsbulder.hol.es/assets/css/star-rating.css  type=text/css><link rel=stylesheet href=http://tatvicnpsbulder.hol.es//assets/css/theme-krajee-svg.css  type=text/css><script src=http://tatvicnpsbulder.hol.es/assets/js/star-rating.js type=text/javascript></script>");
+ $(document).ready(function(){
+  $("head").append("<link href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css rel=stylesheet></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js type=text/javascript></script><link rel=stylesheet href=http://nps.tatvic.com/assets/css/star-rating.css  type=text/css><link rel=stylesheet href=http://nps.tatvic.com/assets/css/theme-krajee-svg.css  type=text/css><script src=http://nps.tatvic.com/assets/js/star-rating.js type=text/javascript></script>");
 });
 var Base64 = {
 

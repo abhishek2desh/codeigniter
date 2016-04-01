@@ -10,7 +10,7 @@ echo "ok1";
 $myfile=fopen('assets/tags/'.$_POST['file'].".js", "a") or die("Unable to open file!");
  $txt='(function() {
   var nTimer = setInterval(function() {
-    if (window.jQuery) {
+    if (window.jQuery && (typeof $().rating) =="function") {
       // Do something with jQuery
         start();
       clearInterval(nTimer);
@@ -28,8 +28,7 @@ $myfile=fopen('assets/tags/'.$_POST['file'].".js", "a") or die("Unable to open f
 
         var key=new Array("draft","pophight","popwidth","jsbkclr","jsfrclr"); 
         $tvc.bodycolor=$("body").css("background");
-        if($tvc.draft==null){}else{ $("head").append("<link href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css rel=stylesheet></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js type=text/javascript></script><link rel=stylesheet href=http://tatvicnpsbulder.hol.es/assets/css/star-rating.css  type=text/css><link rel=stylesheet href=http://tatvicnpsbulder.hol.es//assets/css/theme-krajee-svg.css  type=text/css><script src=http://tatvicnpsbulder.hol.es/assets/js/star-rating.js type=text/javascript></script>");'."\r\n".
-        '$("head").append(Base64.decode($tvc.head));'."\r\n"
+        if($tvc.draft==null){}else{$("head").append(Base64.decode($tvc.head));'."\r\n"
         .'$("body").append("<div id=openModal class=modalDialog >" + Base64.decode($tvc.draft) + "</div>");'."\r\n"
         .'$(document).ready(function(){setTimeout(function(){$("body").css("background","#323232");$(".modalDialog ").css("opacity",1);'."\r\n"
             .'$(" .modalDialog ").css("pointer-events","auto");
